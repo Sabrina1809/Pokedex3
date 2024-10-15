@@ -334,6 +334,7 @@ function oneLeftOrRight(e, oneUpOrDown, pokemonArrayToShow) {
 }
 
 function checkNextIndex(currentIndex, oneUpOrDown, pokemonArrayToShow) {
+   
     if (pokemonArrayToShow == filteredPokemonAllDetails) {
         if (currentIndex == 0 && oneUpOrDown == -1) {
             nextIndex = filteredPokemonAllDetails.length - 1
@@ -342,6 +343,9 @@ function checkNextIndex(currentIndex, oneUpOrDown, pokemonArrayToShow) {
         } else {
             nextIndex = currentIndex + oneUpOrDown;
         }
+        return nextIndex
+    } else {
+        nextIndex = currentIndex + oneUpOrDown;
     }
     // console.log("nextIndex", nextIndex);
     // console.log("currentIndex", currentIndex);
