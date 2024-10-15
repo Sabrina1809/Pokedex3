@@ -195,7 +195,6 @@ function closeOverlay() {
 }
 
 function fillOverlay(indexOfPokemonArrayToShow) {
-    // let thisName = pokemonArrayToShow[indexOfPokemonArrayToShow].name;
     let pokemonTypes = setTypesToPokemon(pokemonArrayToShow, indexOfPokemonArrayToShow)
     document.getElementById("overlay_number_pokemon").innerText = `#${pokemonArrayToShow[indexOfPokemonArrayToShow].id}`
     document.getElementById("overlay_name_pokemon").innerText = `${pokemonArrayToShow[indexOfPokemonArrayToShow].name}`
@@ -212,6 +211,8 @@ function fillOverlay(indexOfPokemonArrayToShow) {
 }
 
 function checkLeftRightButtons(pokemonArrayToShow, indexOfPokemonArrayToShow) {
+    document.getElementById("toLeft").style.opacity = "1";
+    document.getElementById("toRight").style.opacity = "1";
     if (pokemonArrayToShow == unfilteredPokemonAllDetails) {
         if (indexOfPokemonArrayToShow == 0) {
             document.getElementById("toLeft").style.opacity = "0";
@@ -333,14 +334,19 @@ function oneLeftOrRight(e, oneUpOrDown, pokemonArrayToShow) {
 }
 
 function checkNextIndex(currentIndex, oneUpOrDown, pokemonArrayToShow) {
-    nextIndex = currentIndex + oneUpOrDown;
+   
     if (pokemonArrayToShow == filteredPokemonAllDetails) {
-        if (currentIndex == 0) {
+        if (currentIndex == 0 && oneUpOrDown == -1) {
             nextIndex = filteredPokemonAllDetails.length - 1
-        } else if (currentIndex = filteredPokemonAllDetails.length - 1) {
+        } else if (currentIndex == filteredPokemonAllDetails.length - 1 && oneUpOrDown == 1) {
             nextIndex = 0
+        } else {
+            nextIndex = currentIndex + oneUpOrDown;
         }
     }
+    console.log("nextIndex", nextIndex);
+    console.log("currentIndex", currentIndex);
+    console.log("oneUpOrDown", oneUpOrDown);
     return nextIndex
 }
 
