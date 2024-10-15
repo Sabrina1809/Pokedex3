@@ -56,12 +56,12 @@ async function load50UnfilteredPokemon() {
     let namesAndURL = dataAllPokemon.results;
     let promisesSinglePokemon = namesAndURL.map(pokemon => fetch(pokemon.url).then(res => res.json()));
     unfilteredPokemonDetails = await Promise.all(promisesSinglePokemon); 
-    console.log('unfilteredPokemonDetails: ', unfilteredPokemonDetails)
+    // console.log('unfilteredPokemonDetails: ', unfilteredPokemonDetails)
     let promisesUnfilteredPokemonMoreDetails = unfilteredPokemonDetails.map(pokemon => fetch(pokemon.species.url).then(res => res.json()));
     unfilteredPokemonMoreDetails = await Promise.all(promisesUnfilteredPokemonMoreDetails); 
-    console.log('unfilteredPokemonMoreDetails: ', unfilteredPokemonMoreDetails)
+    // console.log('unfilteredPokemonMoreDetails: ', unfilteredPokemonMoreDetails)
     unfilteredPokemonAllDetails = await connectArrays(unfilteredPokemonDetails, unfilteredPokemonMoreDetails, unfilteredPokemonAllDetails)
-    console.log('unfilteredPokemonAllDetails: ', unfilteredPokemonAllDetails)
+    // console.log('unfilteredPokemonAllDetails: ', unfilteredPokemonAllDetails)
     offset = offset + 50 
     renderNext20Pokemon(pokemonArrayToShow)
     

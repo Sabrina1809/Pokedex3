@@ -62,16 +62,16 @@ async function checkIndexOfPokemonInAllNames(nameToFind) {
         index = null;
     } else {
         let indexAllPokemon = allPokemonNames.results.findIndex(pokemon => pokemon.name === nameToFind);
-        console.log(indexAllPokemon)
+        // console.log(indexAllPokemon)
         let responseDetails = await fetch(allPokemonNames.results[indexAllPokemon].url);
         let pokemonDetails = await responseDetails.json();
-        console.log('pokemonDetails', pokemonDetails);
+        // console.log('pokemonDetails', pokemonDetails);
         let responseMoreDetails = await fetch(pokemonDetails.species.url);
         let pokemonMoreDetails = await responseMoreDetails.json();
-        console.log('pokemonMoreDetails', pokemonMoreDetails);
+        // console.log('pokemonMoreDetails', pokemonMoreDetails);
         let responsePokemonEvoChain = await fetch(pokemonMoreDetails.evolution_chain.url);
         let pokemonEvoChain = await responsePokemonEvoChain.json();
-        console.log('evochain', pokemonEvoChain)
+        // console.log('evochain', pokemonEvoChain)
         connectDetails(pokemonDetails, pokemonMoreDetails, pokemonEvoChain)
         index = checkIndexOfPokemon(nameToFind)
     }
@@ -115,23 +115,23 @@ function setGrayScale(evo1Name, evo2Name, evo3Name, thisName) {
     document.getElementById("evo2PokemonImg").style.filter = "grayscale(100%)";
     document.getElementById("evo3PokemonImg").style.filter = "grayscale(100%)";
     if (evo1Name.innerHTML == thisName) {
-        console.log(evo1Name.innerHTML, thisName);
+        // console.log(evo1Name.innerHTML, thisName);
         document.getElementById("evo1PokemonImg").style.filter = "grayscale(0%)";
     } else if (evo2Name.innerHTML == thisName) {
-        console.log(evo2Name.innerHTML, thisName);
+        // console.log(evo2Name.innerHTML, thisName);
         document.getElementById("evo2PokemonImg").style.filter = "grayscale(0%)";
     } else if (evo3Name.innerHTML == thisName) {
-        console.log(evo3Name.innerHTML, thisName);
+        // console.log(evo3Name.innerHTML, thisName);
         document.getElementById("evo3PokemonImg").style.filter = "grayscale(0%)";
     }
 }
 
 async function openEvoPokemon(e) {
-    console.log(e)
+    // console.log(e)
     let evoNameToOpen = e.srcElement.nextElementSibling.innerHTML;
-    console.log(evoNameToOpen);
+    // console.log(evoNameToOpen);
     let evoIndexToOpen = await checkIndexOfPokemon(evoNameToOpen)
-    console.log(evoIndexToOpen);
+    // console.log(evoIndexToOpen);
     addClassNamesButtons(evoIndexToOpen);
     let nextIndex = evoIndexToOpen;
     fillOverlay(nextIndex) 

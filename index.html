@@ -15,8 +15,12 @@
                 <p>Pokedex</p>
             </div>
             <div class="input_ctn">
-                <input onkeydown="if(event.key === 'Enter') getFilter()" placeholder="mind. 3 Zeichen" type="text" name="search" id="search">
-                <img src="./img/icons8-filter-50.png" alt="Filter">
+                <img onclick="window.location.reload()" src="./img/icons8-filter-löschen-50.png" alt="Filter löschen" class="delete_filter">
+                <div class="input_filter">
+                    <input onkeydown="if(event.key === 'Enter') getFilter()" placeholder="min. 1 Buchstabe" type="text" name="search" id="search">
+                    <img onclick="getFilter()" src="./img/icons8-filter-50.png" alt="Filter">
+                </div>
+               
             </div>
         </div>
     </header>

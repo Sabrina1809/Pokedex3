@@ -9,7 +9,7 @@ async function fetchAllPokemonNames() {
     let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0');
     let responseAsJson = await response.json();
     allPokemonNames = responseAsJson;
-    console.log('all Pokemon names: ', allPokemonNames);
+    // console.log('all Pokemon names: ', allPokemonNames);
     unfilteredPokemonNames = allPokemonNames;
     load50UnfilteredPokemon()
 }
@@ -334,7 +334,6 @@ function oneLeftOrRight(e, oneUpOrDown, pokemonArrayToShow) {
 }
 
 function checkNextIndex(currentIndex, oneUpOrDown, pokemonArrayToShow) {
-   
     if (pokemonArrayToShow == filteredPokemonAllDetails) {
         if (currentIndex == 0 && oneUpOrDown == -1) {
             nextIndex = filteredPokemonAllDetails.length - 1
@@ -344,9 +343,9 @@ function checkNextIndex(currentIndex, oneUpOrDown, pokemonArrayToShow) {
             nextIndex = currentIndex + oneUpOrDown;
         }
     }
-    console.log("nextIndex", nextIndex);
-    console.log("currentIndex", currentIndex);
-    console.log("oneUpOrDown", oneUpOrDown);
+    // console.log("nextIndex", nextIndex);
+    // console.log("currentIndex", currentIndex);
+    // console.log("oneUpOrDown", oneUpOrDown);
     return nextIndex
 }
 

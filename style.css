@@ -34,7 +34,7 @@ header {
     background-color: rgb(29, 36, 58);
     border-bottom: 0.5px rgba(255, 255, 255, 0.75);
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
-    padding: 20px 0;
+    padding: 15px 0;
     z-index: 20;
     & .ctn {
         display: flex;
@@ -45,46 +45,63 @@ header {
             display: flex;
             flex-direction: row;
             align-items: center;
-
             & img {
                 width: 40px;
                 height: 40px;
             }
         }
         & .input_ctn {
-            position: relative;
-
-            & #search {
-                width: 200px;
-                height: 30px;
-                border-radius: 5px;
-                padding-left: 10px;
+            display: flex;
+            gap: 5px;
+            .delete_filter {
                 background-color: white;
-                border: none;
-                outline: none;
-
-                &:focus {
+                padding: 7px 10px;
+                border-radius: 5px;
+                height: 30px;
+                width: 36px;
+                &:hover {
+                    cursor: pointer;
+                }
+                &:active {
                     box-shadow: 0 0 5px rgb(29, 36, 58) inset;
                 }
-
-                &::placeholder {
-                    color: var(--placeholder-color, gray);
-                }
             }
-            & img {
-                position: absolute;
-                height: 16px;
-                width: 16px;
-                top: 7px;
-                right: 10px;
+            .input_filter {
+                position: relative;
+                & #search {
+                    width: 150px;
+                    height: 30px;
+                    border-radius: 5px;
+                    padding-left: 10px;
+                    background-color: white;
+                    border: none;
+                    outline: none;
+    
+                    &:focus {
+                        box-shadow: 0 0 5px rgb(29, 36, 58) inset;
+                    }
+                    &::placeholder {
+                        color: var(--placeholder-color, gray);
+                    }
+                }
+                & img {
+                    position: absolute;
+                    height: 16px;
+                    width: 16px;
+                    top: 7px;
+                    right: 10px;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
             }
         }
     }
 }
 
 main {
-    margin-top: 88px;
-    margin-bottom: 35px;
+    margin-top: 80px;
+    margin-bottom: 25px;
     padding: 15px 0;
     min-height: calc(100vh - 138px);
     & .ctn {
@@ -175,15 +192,10 @@ main {
 
 footer {
     background-color: rgb(29, 36, 58);
-    /* font-size: 10px; */
-    padding: 20px 0;
+    padding: 15px 0;
     text-align: center;
     border-top: 0.5px rgba(255, 255, 255, 0.75);
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
-    /* position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0; */
 }
 
 .card_overlay_ctn {
