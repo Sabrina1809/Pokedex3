@@ -123,17 +123,17 @@
                 </div>
                 <div id="evo_chain" class="evo_chain">
                     <div class="evo_chain_ctn">
-                        <div id="evo_pokemon" class="evo_pokemon pokemon_joung">
+                        <div onclick="openEvoPokemon(event)" id="evo1pokemon" class="evo_pokemon pokemon_joung">
                             <img id="evo1PokemonImg" src="./img/icons8-pikachu-pokemon-100.png" alt="Pokemon">
                             <span id="evo1PokemonName">Charmander</span>
                         </div>
                         <!-- <span>>></span> -->
-                        <div class="evo_pokemon pokemon_middle">
+                        <div onclick="openEvoPokemon(event)" id="evo2pokemon" class="evo_pokemon pokemon_middle">
                             <img id="evo2PokemonImg" src="./img/icons8-pikachu-pokemon-100.png" alt="Pokemon">
                             <span id="evo2PokemonName">Charmeleon</span>
                         </div>
                         <!-- <span>>></span> -->
-                        <div class="evo_pokemon pokemon_adult">
+                        <div onclick="openEvoPokemon(event)" id="evo3pokemon" class="evo_pokemon pokemon_adult">
                             <img id="evo3PokemonImg" src="./img/icons8-pikachu-pokemon-100.png" alt="Pokemon">
                             <span id="evo3PokemonName">Charizard</span>
                         </div>
@@ -146,10 +146,11 @@
         <img id="loading_img" src="./img/pokeball-182.png" alt="Pokeball">
         <p id="loading_text"></p>
     </div>
-   
+    <script src="./script/loadingSpinner.js"></script>
     <script src="./script/unfilteredPokemon.js"></script>
     <script src="./script/filteredPokemon.js"></script>
     <script src="script.js"></script>
+    <script src="./script/evochain.js"></script>
    
 </body>
 </html>

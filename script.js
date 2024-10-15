@@ -5,10 +5,10 @@ let inputField = document.getElementById("search");
 let pokemonArrayToShow = unfilteredPokemonAllDetails;
 
 async function fetchAllPokemonNames() {
+    startLoadingSpinner()
     let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0');
     let responseAsJson = await response.json();
     allPokemonNames = responseAsJson;
-    document.getElementById("loadingspinner_ctn").style.display = "none";
     console.log('all Pokemon names: ', allPokemonNames);
     unfilteredPokemonNames = allPokemonNames;
     load50UnfilteredPokemon()
@@ -64,7 +64,6 @@ async function fetchAllPokemonNames() {
 
 
 async function connectArrays(details, moreDetails, allDetails) {
-
     for (let i = 0; i < details.length; i++) {
         if (details[i].is_default == true) {
             let responseEvoChain = await fetch(moreDetails[i].evolution_chain.url);
@@ -87,13 +86,14 @@ async function connectArrays(details, moreDetails, allDetails) {
                 {"chain" : evochain.chain}, 
             )
             allDetails.push(singlePokemon);
+            allDetails.sort((a, b) => a.id - b.id);
         }
     }
     return allDetails
 }
 
 function showMore(pokemonArrayToShow) {
-
+    startLoadingSpinner()
     if (pokemonArrayToShow == unfilteredPokemonAllDetails) {
         load50UnfilteredPokemon()
     } else {
@@ -114,10 +114,10 @@ function checkNumberToShow(pokemonArrayToShow) {
 }
 
 async function renderNext20Pokemon(pokemonArrayToShow) {
+    stopLoadingSpinner()
     let numberToShow = checkNumberToShow(pokemonArrayToShow);
     cardTemplate(numberToShow, pokemonArrayToShow)
     document.getElementById("show_more").className = `${numberToShow}`;
-
 }
 
 function cardTemplate(numberToShow, pokemonArrayToShow) {
@@ -195,7 +195,7 @@ function closeOverlay() {
 }
 
 function fillOverlay(indexOfPokemonArrayToShow) {
-    let thisName = pokemonArrayToShow[indexOfPokemonArrayToShow].name;
+    // let thisName = pokemonArrayToShow[indexOfPokemonArrayToShow].name;
     let pokemonTypes = setTypesToPokemon(pokemonArrayToShow, indexOfPokemonArrayToShow)
     document.getElementById("overlay_number_pokemon").innerText = `#${pokemonArrayToShow[indexOfPokemonArrayToShow].id}`
     document.getElementById("overlay_name_pokemon").innerText = `${pokemonArrayToShow[indexOfPokemonArrayToShow].name}`
@@ -204,10 +204,24 @@ function fillOverlay(indexOfPokemonArrayToShow) {
     document.body.style.overflow = "hidden";
     colorAndAnimation(pokemonArrayToShow, indexOfPokemonArrayToShow)
     addEventListeners(event)
+    checkLeftRightButtons(pokemonArrayToShow, indexOfPokemonArrayToShow)
     setInfoMain(pokemonArrayToShow, indexOfPokemonArrayToShow)
-    showOverlayInfoMain()
     setInfoStats(pokemonArrayToShow, indexOfPokemonArrayToShow)
-    pokemonEvolution(unfilteredPokemonAllDetails, thisName)
+    setInfoEvo(pokemonArrayToShow, indexOfPokemonArrayToShow)
+    showOverlayInfoMain()
+}
+
+function checkLeftRightButtons(pokemonArrayToShow, indexOfPokemonArrayToShow) {
+    if (pokemonArrayToShow == unfilteredPokemonAllDetails) {
+        if (indexOfPokemonArrayToShow == 0) {
+            document.getElementById("toLeft").style.opacity = "0";
+        } else if (indexOfPokemonArrayToShow == pokemonArrayToShow.length - 1) {
+            document.getElementById("toRight").style.opacity = "0";
+        } else {
+            document.getElementById("toLeft").style.opacity = "1";
+            document.getElementById("toRight").style.opacity = "1";
+        }
+    } 
 }
 
 function colorAndAnimation(pokemonArrayToShow, indexOfPokemonArrayToShow) {
@@ -301,73 +315,11 @@ function showOverlayInfoEvo() {
     closeOverlayInfos()
     document.getElementById("evo_chain").style.display = "flex";
     document.getElementById("overlay_menu_evochain").style.borderBottom = "1px solid white";
-}
 
-function pokemonEvolution(unfilteredPokemonAllDetails, thisName) {
-    let indexAllPokemon = checkThisIndex(unfilteredPokemonAllDetails, thisName);
-    let evo1Name = document.getElementById("evo1PokemonName");
-    let evo2Name = document.getElementById("evo2PokemonName");
-    let evo3Name = document.getElementById("evo3PokemonName");
-    evo3Name.style.display = "flex";
-    if (unfilteredPokemonAllDetails[indexAllPokemon].chain.evolves_to[0].evolves_to.length !== 0) {
-        evo3Name.innerHTML = unfilteredPokemonAllDetails[indexAllPokemon].chain.evolves_to[0].evolves_to[0].species.name;
-    } else {
-        evo3Name.style.display = "none"
-    }
-   
-    evo2Name.innerHTML = unfilteredPokemonAllDetails[indexAllPokemon].chain.evolves_to[0].species.name;
-    evo1Name.innerHTML = unfilteredPokemonAllDetails[indexAllPokemon].chain.species.name;
-    let evo1Index = checkThisIndex(unfilteredPokemonAllDetails, evo1Name.innerHTML);
-    let evo2Index = checkThisIndex(unfilteredPokemonAllDetails, evo2Name.innerHTML);
-    let evo3Index = checkThisIndex(unfilteredPokemonAllDetails, evo3Name.innerHTML);
-   
-    setEvoImg(unfilteredPokemonAllDetails, indexAllPokemon, evo1Index, evo2Index, evo3Index)
-    setGrayScale(evo1Name, evo2Name, evo3Name, thisName)
 }
-
-function setEvoImg(unfilteredPokemonAllDetails, indexAllPokemon, evo1Index, evo2Index, evo3Index) {
-    let evo1Img = document.getElementById("evo1PokemonImg");
-    let evo2Img = document.getElementById("evo2PokemonImg");
-    let evo3Img = document.getElementById("evo3PokemonImg");
-    evo3Img.style.display = "flex";
-    
-    evo1Img.src = unfilteredPokemonAllDetails[evo1Index].img;
-    evo2Img.src = unfilteredPokemonAllDetails[evo2Index].img;
-  
-    if (unfilteredPokemonAllDetails[indexAllPokemon].chain.evolves_to[0].evolves_to.length !== 0) {
-        evo3Img.src = unfilteredPokemonAllDetails[evo3Index].img;
-    } else {
-        evo3Img.style.display = "none"
-    }
-}
-
-function setGrayScale(evo1Name, evo2Name, evo3Name, thisName) {
-    document.getElementById("evo1PokemonImg").style.filter = "grayscale(100%)";
-    document.getElementById("evo2PokemonImg").style.filter = "grayscale(100%)";
-    document.getElementById("evo3PokemonImg").style.filter = "grayscale(100%)";
-    if (evo1Name.innerHTML == thisName) {
-        document.getElementById("evo1PokemonImg").style.filter = "grayscale(0%)";
-    } else if (evo2Name.innerHTML == thisName) {
-        document.getElementById("evo2PokemonImg").style.filter = "grayscale(0%)";
-    } else if (evo3Name.innerHTML == thisName) {
-        document.getElementById("evo3PokemonImg").style.filter = "grayscale(0%)";
-    }
-}
-
-function checkThisIndex(unfilteredPokemonAllDetails, thisName) {
-    let index;
-    for (let i = 0; i < unfilteredPokemonAllDetails.length; i++) {
-        if (unfilteredPokemonAllDetails[i].name == thisName) {
-            index = i
-            return index
-        }
-    }
-    return index
-} 
 
 function oneLeftOrRight(e, oneUpOrDown, pokemonArrayToShow) {
     e.stopPropagation()
-    
     document.getElementById("toLeft").classList.remove("buttonLeftRight")
     document.getElementById("toRight").classList.remove("buttonLeftRight")
     let currentIndex = Number(document.getElementById("toLeft").className);
@@ -381,12 +333,13 @@ function oneLeftOrRight(e, oneUpOrDown, pokemonArrayToShow) {
 }
 
 function checkNextIndex(currentIndex, oneUpOrDown, pokemonArrayToShow) {
-    nextIndex = currentIndex + oneUpOrDown
-    if (nextIndex == -1) {
-        nextIndex = pokemonArrayToShow.length - 1
-    }
-    if (nextIndex == pokemonArrayToShow.length) {
-        nextIndex = 0
+    nextIndex = currentIndex + oneUpOrDown;
+    if (pokemonArrayToShow == filteredPokemonAllDetails) {
+        if (currentIndex == 0) {
+            nextIndex = filteredPokemonAllDetails.length - 1
+        } else if (currentIndex = filteredPokemonAllDetails.length - 1) {
+            nextIndex = 0
+        }
     }
     return nextIndex
 }

@@ -21,7 +21,8 @@ let filteredPokemonMoreDetails = [];
 let filteredPokemonNames = [];
 
 function getFilter() {
-    let filter = inputField.value
+    startLoadingSpinner()
+    let filter = inputField.value;
     console.log(filter)
     document.getElementById("cards_area").innerHTML = "";
     filteredPokemonDetails = [];
@@ -64,7 +65,6 @@ async function loadFilteredPokemon() {
     console.log('filteredPokemonMoreDetails', filteredPokemonMoreDetails);
     filteredPokemonAllDetails = await connectArrays(filteredPokemonDetails, filteredPokemonMoreDetails, filteredPokemonAllDetails)
     console.log('filteredPokemonAllDetails', filteredPokemonAllDetails)
-    // checkFilteredPokemonInfo(filteredPokemon, filteredPokemonMoreDetails, filteredPokemonInfo)
     pokemonArrayToShow = filteredPokemonAllDetails;
     renderNext20Pokemon(pokemonArrayToShow)
 }

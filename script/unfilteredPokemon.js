@@ -64,6 +64,7 @@ async function load50UnfilteredPokemon() {
     console.log('unfilteredPokemonAllDetails: ', unfilteredPokemonAllDetails)
     offset = offset + 50 
     renderNext20Pokemon(pokemonArrayToShow)
+    
 }
 
 

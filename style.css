@@ -300,17 +300,14 @@ footer {
             & .overlay_info_main {
                 display: flex;
                 flex-direction: column;
-
-            
                 & .description {
-                    width: 40%;
+                    width: 130px;
                     display: inline-block;
                     margin-bottom: 15px;
-
-                    & #abilities {
-                        display: inline-block;
-                        width: 55%;
-                    }
+                }
+                & .value {
+                    display: inline-block;
+                    width: 180px;
                 }
             }
             & .overlay_info_main > * {
