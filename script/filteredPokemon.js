@@ -21,7 +21,7 @@ let filteredPokemonMoreDetails = [];
 let filteredPokemonNames = [];
 
 function getFilter() {
-    let filter = inputField.value;
+    let filter = inputField.value.toLowerCase();
     console.log(filter)
     if (filter.length >= 1) {
         startLoadingSpinner()
@@ -41,7 +41,7 @@ function getFilter() {
 
 function setPlaceholder(color) {
     inputField.value = "";
-    inputField.setAttribute("placeholder", "min. 1 Buchstabe");
+    inputField.setAttribute("placeholder", "mind. 1 Buchstabe");
     inputField.style.setProperty('--placeholder-color', color);
 }
 

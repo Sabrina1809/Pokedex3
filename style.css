@@ -103,7 +103,7 @@ main {
     margin-top: 80px;
     margin-bottom: 25px;
     padding: 15px 0;
-    min-height: calc(100vh - 138px);
+    min-height: calc(100vh - 80px);
     & .ctn {
         display: flex;
         flex-wrap: wrap;
@@ -348,7 +348,6 @@ footer {
                             width: 0%;
                             border: 1px solid black;
                             border-radius: 10px;
-                            /* background-color: rgb(199, 32, 32); */
                             background-color: var(--pokemon-type-color);
                             animation: showRedLine 1s ease-in-out;
                         }
@@ -369,6 +368,7 @@ footer {
                         display: flex;
                         flex-direction: column;
                         align-items: center;
+                        opacity: 0;
                         gap: 15px;
                         & img {
                             margin: 0 auto;
@@ -385,21 +385,16 @@ footer {
                         & #evo1PokemonImg {
                             width: 40px;
                             height: 40px;
-                            /* scale: 0.7; */
                         }
                         & #evo2PokemonImg {
                             width: 70px;
                             height: 70px;
-                            /* scale: 1.0; */
                         }
                         & #evo3PokemonImg {
                             width: 130px;
                             height: 130px;
                         }
-                       
                     }
-                        
-                    
                 }
             }
         }
@@ -408,6 +403,46 @@ footer {
         cursor: pointer;
     }
 }
+
+.showEvoPokemon1Animation {
+    animation: showEvoPokemon1 1s ease-in-out;
+}
+
+@keyframes showEvoPokemon1 {
+    0% {
+      opacity: 0;  
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.showEvoPokemon2Animation {
+    animation: showEvoPokemon2 1.5s ease-in-out;
+}
+
+@keyframes showEvoPokemon2 {
+    0% {
+      opacity: 0;  
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.showEvoPokemon3Animation {
+    animation: showEvoPokemon3 1.5s ease-in-out;
+}
+
+@keyframes showEvoPokemon3 {
+    0% {
+      opacity: 0; 
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 
 .showPokemonAnimation {
     animation: showPokemon 1s ease-in-out;

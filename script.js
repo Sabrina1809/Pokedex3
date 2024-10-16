@@ -212,15 +212,21 @@ function fillOverlay(indexOfPokemonArrayToShow) {
 
 function checkLeftRightButtons(pokemonArrayToShow, indexOfPokemonArrayToShow) {
     document.getElementById("toLeft").style.opacity = "1";
+    document.getElementById("toLeft").style.pointerEvents = 'auto';
     document.getElementById("toRight").style.opacity = "1";
+    document.getElementById("toRight").style.pointerEvents = 'auto';
     if (pokemonArrayToShow == unfilteredPokemonAllDetails) {
         if (indexOfPokemonArrayToShow == 0) {
             document.getElementById("toLeft").style.opacity = "0";
+            document.getElementById("toLeft").style.pointerEvents = 'none';
         } else if (indexOfPokemonArrayToShow == pokemonArrayToShow.length - 1) {
             document.getElementById("toRight").style.opacity = "0";
+            document.getElementById("toRight").style.pointerEvents = 'none';
         } else {
             document.getElementById("toLeft").style.opacity = "1";
+            document.getElementById("toLeft").style.pointerEvents = 'auto';
             document.getElementById("toRight").style.opacity = "1";
+            document.getElementById("toRight").style.pointerEvents = 'auto';
         }
     } 
 }
@@ -314,9 +320,35 @@ function setInfoStats(pokemonArrayToShow, indexOfPokemonArrayToShow) {
 
 function showOverlayInfoEvo() {
     closeOverlayInfos()
+    resetAnimationEvo()
+   
     document.getElementById("evo_chain").style.display = "flex";
     document.getElementById("overlay_menu_evochain").style.borderBottom = "1px solid white";
+    startAnamationEvo()
+}
 
+function resetAnimationEvo() {
+    document.getElementById("evo1pokemon").classList.remove("showEvoPokemon1Animation")
+    document.getElementById("evo2pokemon").classList.remove("showEvoPokemon2Animation")
+    document.getElementById("evo3pokemon").classList.remove("showEvoPokemon3Animation")
+    document.getElementById("evo1pokemon").style.opacity = "0";
+    document.getElementById("evo2pokemon").style.opacity = "0";
+    document.getElementById("evo3pokemon").style.opacity = "0";
+}
+
+function startAnamationEvo() {
+    setTimeout(() => {
+        document.getElementById("evo1pokemon").classList.add("showEvoPokemon1Animation")
+        document.getElementById("evo1pokemon").style.opacity = "1";
+    }, 500);
+    setTimeout(() => {
+        document.getElementById("evo2pokemon").classList.add("showEvoPokemon2Animation")
+        document.getElementById("evo2pokemon").style.opacity = "1";
+    }, 700);
+    setTimeout(() => {
+        document.getElementById("evo3pokemon").classList.add("showEvoPokemon3Animation")
+        document.getElementById("evo3pokemon").style.opacity = "1";
+    }, 1000);  
 }
 
 function oneLeftOrRight(e, oneUpOrDown, pokemonArrayToShow) {
