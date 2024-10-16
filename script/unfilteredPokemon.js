@@ -4,7 +4,7 @@ let unfilteredPokemonDetails = [];
 let unfilteredPokemonMoreDetails = [];
 let unfilteredPokemonNames = [];
 
-async function load50UnfilteredPokemon() {
+async function loadFiftyUnfilteredPokemon() {
     let response = await fetch(baseURL + `${offset}`);
     let dataAllPokemon = await response.json();
     let namesAndURL = dataAllPokemon.results;
@@ -13,6 +13,13 @@ async function load50UnfilteredPokemon() {
     let promisesUnfilteredPokemonMoreDetails = unfilteredPokemonDetails.map(pokemon => fetch(pokemon.species.url).then(res => res.json()));
     unfilteredPokemonMoreDetails = await Promise.all(promisesUnfilteredPokemonMoreDetails); 
     unfilteredPokemonAllDetails = await connectArrays(unfilteredPokemonDetails, unfilteredPokemonMoreDetails, unfilteredPokemonAllDetails)
-    offset = offset + 50 
-    renderNext20Pokemon(pokemonArrayToShow)
+    offset = offset + 50;
+    renderNextTwentyPokemon(pokemonArrayToShow)
+}
+
+function deleteFilter() {
+    document.getElementById("cards_area").innerHTML = "";
+    document.getElementById("show_more").className = "0";
+    pokemonArrayToShow = unfilteredPokemonAllDetails;
+    renderNextTwentyPokemon(pokemonArrayToShow)
 }

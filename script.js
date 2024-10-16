@@ -10,14 +10,13 @@ async function fetchAllPokemonNames() {
     let responseAsJson = await response.json();
     allPokemonNames = responseAsJson;
     unfilteredPokemonNames = allPokemonNames;
-    load50UnfilteredPokemon()
+    loadFiftyUnfilteredPokemon()
 }
 
 async function connectArrays(details, moreDetails, allDetails) {
     for (let i = 0; i < details.length; i++) {
         if (details[i].is_default == true) {
-            let responseEvoChain = await fetch(moreDetails[i].evolution_chain.url);
-            let evochain = await responseEvoChain.json();
+            let evochain = await saveEvoChain(moreDetails, i);
             let singlePokemon = Object.assign(
                 {}, 
                 {"abilities" : details[i].abilities}, 
@@ -42,12 +41,19 @@ async function connectArrays(details, moreDetails, allDetails) {
     return allDetails
 }
 
+async function saveEvoChain(moreDetails, i) {
+    let responseEvoChain = await fetch(moreDetails[i].evolution_chain.url);
+    let evochain = await responseEvoChain.json();
+    return evochain
+}
+
 function showMore(pokemonArrayToShow) {
     startLoadingSpinner()
     if (pokemonArrayToShow == unfilteredPokemonAllDetails) {
-        load50UnfilteredPokemon()
+        loadFiftyUnfilteredPokemon()
+     
     } else {
-        renderNext20Pokemon(pokemonArrayToShow)
+        renderNextTwentyPokemon(pokemonArrayToShow)
     }
 }
 
@@ -63,7 +69,7 @@ function checkNumberToShow(pokemonArrayToShow) {
     return number    
 }
 
-async function renderNext20Pokemon(pokemonArrayToShow) {
+async function renderNextTwentyPokemon(pokemonArrayToShow) {
     stopLoadingSpinner()
     let numberToShow = checkNumberToShow(pokemonArrayToShow);
     cardTemplate(numberToShow, pokemonArrayToShow)
