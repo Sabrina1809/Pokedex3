@@ -1,28 +1,9 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let filteredPokemonDetails = [];
 let filteredPokemonMoreDetails = [];
 let filteredPokemonNames = [];
 
 function getFilter() {
     let filter = inputField.value.toLowerCase();
-    console.log(filter)
     if (filter.length >= 1) {
         startLoadingSpinner()
         setPlaceholder('gray')
@@ -51,20 +32,15 @@ function checkNamesArray(filter) {
             filteredPokemonNames.push(allPokemonNames.results[i])
         }
     }
-    // console.log('filterdPokemonNames', filteredPokemonNames)
-
     loadFilteredPokemon()
 }
 
 async function loadFilteredPokemon() {
     let promisesSinglePokemon = filteredPokemonNames.map(pokemon => fetch(pokemon.url).then(res => res.json()));
     filteredPokemonDetails = await Promise.all(promisesSinglePokemon); 
-    // console.log('filteredPokemonDetails', filteredPokemonDetails)
     let promisesallPokemonMoreDetails = filteredPokemonDetails.map(pokemon => fetch(pokemon.species.url).then(res => res.json()));
     filteredPokemonMoreDetails = await Promise.all(promisesallPokemonMoreDetails); 
-    // console.log('filteredPokemonMoreDetails', filteredPokemonMoreDetails);
-    filteredPokemonAllDetails = await connectArrays(filteredPokemonDetails, filteredPokemonMoreDetails, filteredPokemonAllDetails)
-    // console.log('filteredPokemonAllDetails', filteredPokemonAllDetails)
+    filteredPokemonAllDetails = await connectArrays(filteredPokemonDetails, filteredPokemonMoreDetails, filteredPokemonAllDetails);
     pokemonArrayToShow = filteredPokemonAllDetails;
     renderNext20Pokemon(pokemonArrayToShow)
 }

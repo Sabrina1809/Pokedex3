@@ -9,59 +9,9 @@ async function fetchAllPokemonNames() {
     let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0');
     let responseAsJson = await response.json();
     allPokemonNames = responseAsJson;
-    // console.log('all Pokemon names: ', allPokemonNames);
     unfilteredPokemonNames = allPokemonNames;
     load50UnfilteredPokemon()
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 async function connectArrays(details, moreDetails, allDetails) {
     for (let i = 0; i < details.length; i++) {
@@ -321,7 +271,6 @@ function setInfoStats(pokemonArrayToShow, indexOfPokemonArrayToShow) {
 function showOverlayInfoEvo() {
     closeOverlayInfos()
     resetAnimationEvo()
-   
     document.getElementById("evo_chain").style.display = "flex";
     document.getElementById("overlay_menu_evochain").style.borderBottom = "1px solid white";
     startAnamationEvo()
@@ -366,7 +315,6 @@ function oneLeftOrRight(e, oneUpOrDown, pokemonArrayToShow) {
 }
 
 function checkNextIndex(currentIndex, oneUpOrDown, pokemonArrayToShow) {
-   
     if (pokemonArrayToShow == filteredPokemonAllDetails) {
         if (currentIndex == 0 && oneUpOrDown == -1) {
             nextIndex = filteredPokemonAllDetails.length - 1
@@ -379,9 +327,6 @@ function checkNextIndex(currentIndex, oneUpOrDown, pokemonArrayToShow) {
     } else {
         nextIndex = currentIndex + oneUpOrDown;
     }
-    // console.log("nextIndex", nextIndex);
-    // console.log("currentIndex", currentIndex);
-    // console.log("oneUpOrDown", oneUpOrDown);
     return nextIndex
 }
 
