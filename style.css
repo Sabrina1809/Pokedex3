@@ -600,7 +600,14 @@ footer {
 @media(max-width: 400px) {
     header .ctn {
         display: flex;
-        gap: 20px;
+        gap: 10px;
+        & .input_ctn {
+            & .input_filter {
+                & #search {
+                    width: 135px;
+                }
+            }
+        }
     }
     .card_overlay_ctn {
         & .card_overlay {

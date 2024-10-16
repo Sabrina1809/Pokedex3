@@ -22,7 +22,7 @@ function getFilter() {
 
 function setPlaceholder(color) {
     inputField.value = "";
-    inputField.setAttribute("placeholder", "mind. 1 Buchstabe");
+    inputField.setAttribute("placeholder", "mind. 1 Zeichen");
     inputField.style.setProperty('--placeholder-color', color);
 }
 
